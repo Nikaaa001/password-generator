@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    background: none;
+    border: 2px solid #E6E5EA;
+}
+
+input[type="checkbox"]::after {
+    content: "\f00c";
+    color: #000;
+    display: none;
+}
+
+input[type="checkbox"]:checked {
+    background-image: url(.././public/images/checkbox.svg);
+    background-repeat: no-repeat;
+    background-position: 0;
+    border: none;
+}
