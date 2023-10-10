@@ -2,6 +2,12 @@ import { useState } from 'react'
 
 function App() {
 
+  const [active, setActive] = useState(false);
+
+  const handleClick = () => {
+    setActive(!active);
+  };
+
   const [rangeValue, setRangeValue] = useState(0);
   
   const handleRangeChange = (event) => {
@@ -9,16 +15,13 @@ function App() {
   setRangeValue(newValue);
   };
   
-  const divStyle = {
-  left: `${rangeValue}%`,
-  };
   
   const [sliderValue, setSliderValue] = useState(0);
   const handleSliderChange = (event) => {
   const newValue = event.target.value;
   setSliderValue(newValue);
-
   };
+
   return (
   <>
     <div className="w-screen h-screen bg-gradient-to-r from-bg-blackOne to-bg-blackTwo flex flex-col justify-center">
@@ -47,7 +50,7 @@ function App() {
           <input
               type="range"
               min="0"
-              max="10"
+              max="20"
               step="1"
               value={sliderValue}
               onChange={handleSliderChange}
@@ -55,24 +58,24 @@ function App() {
             />
 
           <div className='flex flex-col mt-[42px]'>
-            <label class="flex items-center">
+            <label className="flex items-center">
               <input type="checkbox"/>
-              <span class="ml-[20px] font-jetbrain font-bold text-16px text-pass-color">Include Uppercase Letters</span>
+              <span className="ml-[20px] font-jetbrain font-bold text-16px text-pass-color">Include Uppercase Letters</span>
             </label>
             
-            <label class="mt-[17px] flex">
+            <label className="mt-[17px] flex">
               <input type="checkbox"/>
-              <span class="ml-[20px] font-jetbrain font-bold text-16px text-pass-color">Include Lowercase Letters</span>
+              <span className="ml-[20px] font-jetbrain font-bold text-16px text-pass-color">Include Lowercase Letters</span>
             </label>
 
-            <label class="ml-[0] mt-[17px] flex">
+            <label className="ml-[0] mt-[17px] flex">
               <input type="checkbox"/>
-              <span class="ml-[20px] font-jetbrain font-bold text-16px text-pass-color">Include Numbers</span>
+              <span className="ml-[20px] font-jetbrain font-bold text-16px text-pass-color">Include Numbers</span>
             </label>
 
-            <label class=" ml-[0] mt-[17px] flex">
+            <label className=" ml-[0] mt-[17px] flex">
               <input type="checkbox"/>
-              <span class=" ml-[20px] font-jetbrain font-bold text-16px text-pass-color">Include Symbols</span>
+              <span className=" ml-[20px] font-jetbrain font-bold text-16px text-pass-color">Include Symbols</span>
             </label>
           </div>
 
@@ -89,7 +92,9 @@ function App() {
             </div>
           </div>
 
-          <button className='w-[311px] h-[56px] bg-neon-green mt-[16px] flex items-center justify-center'>GENERATE <img src='.././public/images/bx_arrow-to-left.svg' alt="gela" className='ml-[16px]' /></button>
+          <button className='w-[311px] h-[56px] bg-neon-green mt-[16px] flex items-center justify-center'>
+            GENERATE
+            <img src='.././public/images/bx_arrow-to-left.svg' alt="gela" className='ml-[16px]' /></button>
 
         </div>
       </div>
