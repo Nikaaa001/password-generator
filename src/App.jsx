@@ -36,7 +36,15 @@ function App() {
 
     // Create an empty string to store the character sets based on checkboxes.
     let selectedCharacters = '';
+    let result = '';
+    const length = sliderValue;
 
+    const symbols = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*';
+
+    if (!includeUppercaseLetters && !includeLowercaseLetters && !includeNumbers && !includeSymbols) {
+      // If no checkboxes are checked, include all character sets.
+      selectedCharacters = uppercaseLetters + lowercaseLetters + numbers + specialSymbols;
+    }
     // Check the checkbox states and add the corresponding character sets.
     if (includeUppercaseLetters) {
       selectedCharacters += uppercaseLetters;
@@ -51,8 +59,6 @@ function App() {
       selectedCharacters += specialSymbols;
     }
 
-    let result = '';
-    const length = sliderValue;
 
     for (let i = 0; i < length; i++) {
       const randomIndex = Math.floor(Math.random() * selectedCharacters.length);
