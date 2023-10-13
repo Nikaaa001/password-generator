@@ -140,7 +140,7 @@ function App() {
           </div>
 
           <button className='w-[311px] h-[56px] bg-neon-green mt-[16px] flex items-center justify-center' onClick={randomGenerator}>
-            GENERATE <img src='.././public/images/bx_arrow-to-left.svg' alt="gela" className='ml-[16px]' /></button>
+            GENERATE <img src='.././public/images/bx_arrow-to-left.svg' alt="copy" className='ml-[16px]' /></button>
 
         </div>
       </div>
