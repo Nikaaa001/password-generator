@@ -1,27 +1,66 @@
+// import { Result } from 'postcss';
 import { useState } from 'react'
 
 function App() {
 
   const [active, setActive] = useState(false);
+  const [rangeValue, setRangeValue] = useState(0);
+  const [sliderValue, setSliderValue] = useState(0);
+  const [randomValue, setRandomValue] = useState('');
+
+  const [includeUppercaseLetters, setIncludeUppercaseLetters] = useState(false);
+  const [includeLowercaseLetters, setIncludeLowercaseLetters] = useState(false);
+  const [includeNumbers, setIncludeNumbers] = useState(false);
+  const [includeSymbols, setIncludeSymbols] = useState(false);
 
   const handleClick = () => {
     setActive(!active);
   };
 
-  const [rangeValue, setRangeValue] = useState(0);
-  
   const handleRangeChange = (event) => {
-  const newValue = event.target.value;
-  setRangeValue(newValue);
-  };
-  
-  
-  const [sliderValue, setSliderValue] = useState(0);
-  const handleSliderChange = (event) => {
-  const newValue = event.target.value;
-  setSliderValue(newValue);
+    const newValue = event.target.value;
+    setRangeValue(newValue);
   };
 
+  const handleSliderChange = (event) => {
+    const newValue = event.target.value;
+    setSliderValue(newValue);
+  };
+
+  const randomGenerator = () => {
+    // Define the character sets.
+    const uppercaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const lowercaseLetters = 'abcdefghijklmnopqrstuvwxyz';
+    const numbers = '1234567890';
+    const specialSymbols = '!@#$%^&*';
+
+    // Create an empty string to store the character sets based on checkboxes.
+    let selectedCharacters = '';
+
+    // Check the checkbox states and add the corresponding character sets.
+    if (includeUppercaseLetters) {
+      selectedCharacters += uppercaseLetters;
+    }
+    if (includeLowercaseLetters) {
+      selectedCharacters += lowercaseLetters;
+    }
+    if (includeNumbers) {
+      selectedCharacters += numbers;
+    }
+    if (includeSymbols) {
+      selectedCharacters += specialSymbols;
+    }
+
+    let result = '';
+    const length = sliderValue;
+
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * selectedCharacters.length);
+      result += selectedCharacters[randomIndex];
+    }
+
+    setRandomValue(result); // Update the state with the generated result.
+  };
   return (
   <>
     <div className="w-screen h-screen bg-gradient-to-r from-bg-blackOne to-bg-blackTwo flex flex-col justify-center">
@@ -33,7 +72,7 @@ function App() {
         <div
           className="max-w-[343px] h-[64px] bg-div-bg mt-[16px] pl-[16px] pr-[15.5px] flex items-center justify-between">
           <p className=" font-jetbrain font-bold text-pass text-pass-color">
-
+            {randomValue}
           </p>
           <img src="./images/icon-copy.svg" alt="Copy" />
         </div>
@@ -59,22 +98,30 @@ function App() {
 
           <div className='flex flex-col mt-[42px]'>
             <label className="flex items-center">
-              <input type="checkbox"/>
+              <input type="checkbox"
+              checked={includeUppercaseLetters}
+              onChange={() => setIncludeUppercaseLetters(!includeUppercaseLetters)} />
               <span className="ml-[20px] font-jetbrain font-bold text-16px text-pass-color">Include Uppercase Letters</span>
             </label>
             
             <label className="mt-[17px] flex">
-              <input type="checkbox"/>
+              <input type="checkbox" 
+                checked={includeLowercaseLetters}
+                onChange={() => setIncludeLowercaseLetters(!includeLowercaseLetters)}/>
               <span className="ml-[20px] font-jetbrain font-bold text-16px text-pass-color">Include Lowercase Letters</span>
             </label>
 
             <label className="ml-[0] mt-[17px] flex">
-              <input type="checkbox"/>
+              <input type="checkbox" 
+              checked={includeNumbers}
+              onChange={() => setIncludeNumbers(!includeNumbers)} />
               <span className="ml-[20px] font-jetbrain font-bold text-16px text-pass-color">Include Numbers</span>
             </label>
 
             <label className=" ml-[0] mt-[17px] flex">
-              <input type="checkbox"/>
+              <input type="checkbox" 
+              checked={includeSymbols}
+              onChange={() => setIncludeSymbols(!includeSymbols)} />
               <span className=" ml-[20px] font-jetbrain font-bold text-16px text-pass-color">Include Symbols</span>
             </label>
           </div>
@@ -92,9 +139,8 @@ function App() {
             </div>
           </div>
 
-          <button className='w-[311px] h-[56px] bg-neon-green mt-[16px] flex items-center justify-center'>
-            GENERATE
-            <img src='.././public/images/bx_arrow-to-left.svg' alt="gela" className='ml-[16px]' /></button>
+          <button className='w-[311px] h-[56px] bg-neon-green mt-[16px] flex items-center justify-center' onClick={randomGenerator}>
+            GENERATE <img src='.././public/images/bx_arrow-to-left.svg' alt="gela" className='ml-[16px]' /></button>
 
         </div>
       </div>
@@ -102,5 +148,5 @@ function App() {
   </>
   );
   }
-  
+
   export default App;
