@@ -27,46 +27,87 @@ function App() {
     setSliderValue(newValue);
   };
 
-  const randomGenerator = () => {
-    // Define the character sets.
+  const [password, setPassword] = useState("");
+  const [strength, setstrength] = useState("");
+  
+  const randomPasswordGenerator = () => {
     const uppercaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const lowercaseLetters = 'abcdefghijklmnopqrstuvwxyz';
-    const numbers = '1234567890';
-    const specialSymbols = '!@#$%^&*';
+      const lowercaseLetters = 'abcdefghijklmnopqrstuvwxyz';
+      const numbers = '1234567890';
+      const specialSymbols = '!@#$%^&*';
 
-    // Create an empty string to store the character sets based on checkboxes.
-    let selectedCharacters = '';
-    let result = '';
-    const length = sliderValue;
+      let selectedCharacters = '';
+      let result = '';
+      const length = sliderValue;
 
-    const symbols = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*';
+      if (!includeUppercaseLetters && !includeLowercaseLetters && !includeNumbers && !includeSymbols) {
 
-    if (!includeUppercaseLetters && !includeLowercaseLetters && !includeNumbers && !includeSymbols) {
-      // If no checkboxes are checked, include all character sets.
-      selectedCharacters = uppercaseLetters + lowercaseLetters + numbers + specialSymbols;
-    }
-    // Check the checkbox states and add the corresponding character sets.
-    if (includeUppercaseLetters) {
-      selectedCharacters += uppercaseLetters;
-    }
-    if (includeLowercaseLetters) {
-      selectedCharacters += lowercaseLetters;
-    }
-    if (includeNumbers) {
-      selectedCharacters += numbers;
-    }
-    if (includeSymbols) {
-      selectedCharacters += specialSymbols;
-    }
+        selectedCharacters = uppercaseLetters + lowercaseLetters + numbers + specialSymbols;
+      }
+
+      if (includeUppercaseLetters) {
+        selectedCharacters += uppercaseLetters;
+      }
+      if (includeLowercaseLetters) {
+        selectedCharacters += lowercaseLetters;
+      }
+      if (includeNumbers) {
+        selectedCharacters += numbers;
+      }
+      if (includeSymbols) {
+        selectedCharacters += specialSymbols;
+      }
 
 
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * selectedCharacters.length);
-      result += selectedCharacters[randomIndex];
-    }
+      for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * selectedCharacters.length);
+        result += selectedCharacters[randomIndex];
+      }
 
-    setRandomValue(result); // Update the state with the generated result.
+      setRandomValue(result);
+  }
+
+  const strengthgenerate = () => {
+
+    let strength = "";
+
+    if (sliderValue > 16) {
+      strength = "STRONG"
+    } else if (sliderValue > 12) {
+      strength = "MEDIUM"
+    } else if (sliderValue > 7) {
+      s = "WEAK" 
+    } else {
+      strength = "TOO WEAK"
+    }
+  }
+
+  let randomGenerator = () => {
+    let generateStrength = strengthgenerate();
+    setstrength(generateStrength);
+
+    let passwordgenerate = randomPasswordGenerator();
+    setPassword(passwordgenerate);
   };
+
+  const copyToClipboard = () => {
+    if (randomValue) {
+      navigator.clipboard.writeText(randomValue)
+        .then(() => {
+          return (
+            console.log(<p className="">COPIED</p>)
+          );
+        })
+    }
+  };
+
+  // const [textVisible, setTextVisible] = useState(false);
+
+  // const toggleText = () => {
+  //   setTextVisible(!textVisible);
+  // };
+
+
   return (
   <>
     <div className="w-screen h-screen bg-gradient-to-r from-bg-blackOne to-bg-blackTwo flex flex-col justify-center">
@@ -80,7 +121,8 @@ function App() {
           <p className=" font-jetbrain font-bold text-pass text-pass-color">
             {randomValue}
           </p>
-          <img src="./images/icon-copy.svg" alt="Copy" />
+          <img src="./images/icon-copy.svg" alt="Copy" onClick={copyToClipboard}/> 
+          {/*  toggleText */}
         </div>
         <div className="max-w-[343px] h-auto bg-div-bg p-[16px] mt-[16px]">
           <div className="w-auto flex items-center justify-between">
@@ -135,12 +177,13 @@ function App() {
           <div className=" w-full h-[56px] mt-[32px] bg-slider-bg flex justify-between items-center px-[16px]">
             <span className=" font-jetbrain text-16px font-bold text-title-grey">STRENGTH</span>
             <div className=" w-[145px] h-[28px] flex items-center">
-              <span className=' font-jetbrain text-18px font-bold text-pass-color'>MEDIUM</span>
+              <span className=' font-jetbrain text-18px font-bold text-pass-color'>{setstrength}</span>
               <div className=" w-[64px] flex justify-between ml-[16px]">
-                <div className=" w-[10px] h-[28px] border-[2px] border-pass-color"></div>
-                <div className=" w-[10px] h-[28px] border-[2px] border-pass-color"></div>
-                <div className=" w-[10px] h-[28px] border-[2px] border-pass-color"></div>
-                <div className=" w-[10px] h-[28px] border-[2px] border-pass-color"></div>
+                <div className=""></div>
+                <div className=""></div>
+                <div className=""></div>
+                <div className=""></div>
+                
               </div>
             </div>
           </div>
