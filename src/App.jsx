@@ -45,8 +45,6 @@ function App() {
       bgcolors = "#F64A4A";
     }
 
-    console.log(bgcolors);
-
   let randomGenerator = () => {
 
     const uppercaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -168,10 +166,10 @@ function App() {
             <div className=" w-auto h-[28px] flex items-center">
               <span className=' font-jetbrain text-18px font-bold text-pass-color'>{strength}</span>
               <div className=" w-[64px] flex justify-between ml-[16px]">
-                <div className=" w-[10px] h-[28px] border-[2px] border-pass-color " style={ {backgroundColor: bgcolors} }></div>
-                <div className=" w-[10px] h-[28px] border-[2px] border-pass-color " style={ {backgroundColor: bgcolors} }></div>
-                <div className=" w-[10px] h-[28px] border-[2px] border-pass-color " style={ {backgroundColor: bgcolors} }></div>
-                <div className=" w-[10px] h-[28px] border-[2px] border-pass-color" style={ {backgroundColor: bgcolors} }></div>
+                <div className=" w-[10px] h-[28px]" style={ {backgroundColor: bgcolors} }></div>
+                <div className=" w-[10px] h-[28px]" style={ {backgroundColor: bgcolors} }></div>
+                <div className=" w-[10px] h-[28px]" style={ {backgroundColor: bgcolors} }></div>
+                <div className=" w-[10px] h-[28px]" style={ {backgroundColor: bgcolors} }></div>
               </div>
             </div>
           </div>
