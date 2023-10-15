@@ -20,6 +20,7 @@ export default {
         pass: '24px',
         '16px': '16px',
         '18px': '18px',
+        '32px': '32px',
       },
     },
   },

@@ -87,9 +87,6 @@ function App() {
     if (randomValue) {
       navigator.clipboard.writeText(randomValue)
         .then(() => {
-          return (
-            console.log(<p className="">COPIED</p>)
-          );
         })
     }
   };
@@ -98,25 +95,25 @@ function App() {
   return (
   <>
     <div className="w-screen h-screen bg-gradient-to-r from-bg-blackOne to-bg-blackTwo flex flex-col justify-center">
-      <div className=" max-w-[343px] w-[100%] h-auto mx-auto">
-        <h1 className="text-title-grey text-center font-jetbrain text-base font-bold">
+      <div className=" w-[343px] h-auto mx-auto sm:w-[540px]">
+        <h1 className="text-title-grey text-center font-jetbrain text-base font-bold sm:text-pass">
           Password Generator
         </h1>
   
         <div
-          className="max-w-[343px] h-[64px] bg-div-bg mt-[16px] pl-[16px] pr-[15.5px] flex items-center justify-between">
-          <p className=" font-jetbrain font-bold text-pass text-pass-color">
+          className="w-full h-[64px] bg-div-bg mt-[16px] pl-[16px] pr-[15.5px] flex items-center justify-between sm:mt-[31px] sm:pl-[32px] sm:pr-[32px]">
+          <p className=" font-jetbrain font-bold text-pass text-pass-color sm:text-32px">
             {randomValue}
           </p>
           <img src="./images/icon-copy.svg" alt="Copy" onClick={copyToClipboard}/> 
           {/*  toggleText */}
         </div>
-        <div className="max-w-[343px] h-auto bg-div-bg p-[16px] mt-[16px]">
+        <div className="w-full h-auto bg-div-bg p-[16px] mt-[16px] sm:mt-[24px] sm:pl-[32px] sm:pr-[32px] sm:pt-[34px] sm:pb-[32px]">
           <div className="w-auto flex items-center justify-between">
-            <span className="font-jetbrain font-bold text-pass-color leading-normal">
+            <span className="font-jetbrain font-bold text-pass-color leading-normal sm:text-18px">
               Character Length
             </span>
-            <p className="font-jetbrain font-bold text-pass text-neon-green">
+            <p className="font-jetbrain font-bold text-pass text-neon-green sm:text-32px">
               {sliderValue}
             </p>
           </div>
@@ -136,35 +133,35 @@ function App() {
               <input type="checkbox"
               checked={includeUppercaseLetters}
               onChange={() => setIncludeUppercaseLetters(!includeUppercaseLetters)} />
-              <span className="ml-[20px] font-jetbrain font-bold text-16px text-pass-color">Include Uppercase Letters</span>
+              <span className="ml-[20px] font-jetbrain font-bold text-16px text-pass-color sm:text-18px">Include Uppercase Letters</span>
             </label>
             
             <label className="mt-[17px] flex">
               <input type="checkbox" 
                 checked={includeLowercaseLetters}
                 onChange={() => setIncludeLowercaseLetters(!includeLowercaseLetters)}/>
-              <span className="ml-[20px] font-jetbrain font-bold text-16px text-pass-color">Include Lowercase Letters</span>
+              <span className="ml-[20px] font-jetbrain font-bold text-16px text-pass-color sm:text-18px">Include Lowercase Letters</span>
             </label>
 
             <label className="ml-[0] mt-[17px] flex">
               <input type="checkbox" 
               checked={includeNumbers}
               onChange={() => setIncludeNumbers(!includeNumbers)} />
-              <span className="ml-[20px] font-jetbrain font-bold text-16px text-pass-color">Include Numbers</span>
+              <span className="ml-[20px] font-jetbrain font-bold text-16px text-pass-color sm:text-18px">Include Numbers</span>
             </label>
 
             <label className=" ml-[0] mt-[17px] flex">
               <input type="checkbox" 
               checked={includeSymbols}
               onChange={() => setIncludeSymbols(!includeSymbols)} />
-              <span className=" ml-[20px] font-jetbrain font-bold text-16px text-pass-color">Include Symbols</span>
+              <span className=" ml-[20px] font-jetbrain font-bold text-16px text-pass-color sm:text-18px">Include Symbols</span>
             </label>
           </div>
 
           <div className=" w-full h-[56px] mt-[32px] bg-slider-bg flex justify-between items-center px-[16px]">
-            <span className=" font-jetbrain text-16px font-bold text-title-grey">STRENGTH</span>
+            <span className=" font-jetbrain text-16px font-bold text-title-grey sm:text-18px">STRENGTH</span>
             <div className=" w-auto h-[28px] flex items-center">
-              <span className=' font-jetbrain text-18px font-bold text-pass-color'>{strength}</span>
+              <span className=' font-jetbrain text-18px font-bold text-pass-color sm:text-pass'>{strength}</span>
               <div className=" w-[64px] flex justify-between ml-[16px]">
                 <div className=" w-[10px] h-[28px]" style={ {backgroundColor: bgcolors} }></div>
                 <div className=" w-[10px] h-[28px]" style={ {backgroundColor: bgcolors} }></div>
@@ -174,7 +171,7 @@ function App() {
             </div>
           </div>
 
-          <button className='w-[311px] h-[56px] bg-neon-green mt-[16px] flex items-center justify-center' onClick={randomGenerator}>
+          <button className='w-full h-[56px] bg-neon-green mt-[16px] flex items-center justify-center text-16px text-div-bg sm:text-18px' onClick={randomGenerator}>
             GENERATE <img src="./images/bx_arrow-to-left.svg" alt="arrow" className='ml-[16px]' /></button>
 
         </div>
