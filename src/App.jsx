@@ -27,10 +27,28 @@ function App() {
     setSliderValue(newValue);
   };
 
-  const [password, setPassword] = useState("");
-  const [strength, setstrength] = useState("");
-  
-  const randomPasswordGenerator = () => {
+
+    let strength = "";
+    let bgcolors = 0;
+
+    if (sliderValue > 16) {
+      strength = "STRONG";
+      bgcolors = "#A4FFAF";
+    } else if (sliderValue > 12) {
+      strength = "MEDIUM";
+      bgcolors = "#F8CD65";
+    } else if (sliderValue > 7) {
+      strength = "WEAK";
+      bgcolors = "#FB7C58";
+    } else {
+      strength = "TOO WEAK";
+      bgcolors = "#F64A4A";
+    }
+
+    console.log(bgcolors);
+
+  let randomGenerator = () => {
+
     const uppercaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
       const lowercaseLetters = 'abcdefghijklmnopqrstuvwxyz';
       const numbers = '1234567890';
@@ -65,30 +83,7 @@ function App() {
       }
 
       setRandomValue(result);
-  }
-
-  const strengthgenerate = () => {
-
-    let strength = "";
-
-    if (sliderValue > 16) {
-      strength = "STRONG"
-    } else if (sliderValue > 12) {
-      strength = "MEDIUM"
-    } else if (sliderValue > 7) {
-      s = "WEAK" 
-    } else {
-      strength = "TOO WEAK"
-    }
-  }
-
-  let randomGenerator = () => {
-    let generateStrength = strengthgenerate();
-    setstrength(generateStrength);
-
-    let passwordgenerate = randomPasswordGenerator();
-    setPassword(passwordgenerate);
-  };
+    };
 
   const copyToClipboard = () => {
     if (randomValue) {
@@ -100,12 +95,6 @@ function App() {
         })
     }
   };
-
-  // const [textVisible, setTextVisible] = useState(false);
-
-  // const toggleText = () => {
-  //   setTextVisible(!textVisible);
-  // };
 
 
   return (
@@ -176,14 +165,13 @@ function App() {
 
           <div className=" w-full h-[56px] mt-[32px] bg-slider-bg flex justify-between items-center px-[16px]">
             <span className=" font-jetbrain text-16px font-bold text-title-grey">STRENGTH</span>
-            <div className=" w-[145px] h-[28px] flex items-center">
-              <span className=' font-jetbrain text-18px font-bold text-pass-color'>{setstrength}</span>
+            <div className=" w-auto h-[28px] flex items-center">
+              <span className=' font-jetbrain text-18px font-bold text-pass-color'>{strength}</span>
               <div className=" w-[64px] flex justify-between ml-[16px]">
-                <div className=""></div>
-                <div className=""></div>
-                <div className=""></div>
-                <div className=""></div>
-                
+                <div className=" w-[10px] h-[28px] border-[2px] border-pass-color " style={ {backgroundColor: bgcolors} }></div>
+                <div className=" w-[10px] h-[28px] border-[2px] border-pass-color " style={ {backgroundColor: bgcolors} }></div>
+                <div className=" w-[10px] h-[28px] border-[2px] border-pass-color " style={ {backgroundColor: bgcolors} }></div>
+                <div className=" w-[10px] h-[28px] border-[2px] border-pass-color" style={ {backgroundColor: bgcolors} }></div>
               </div>
             </div>
           </div>
