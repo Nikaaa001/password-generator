@@ -1,4 +1,3 @@
-// import { Result } from 'postcss';
 import { useState } from 'react'
 
 function App() {
@@ -27,27 +26,26 @@ function App() {
     setSliderValue(newValue);
   };
 
+  let strength = "";
+  let bgcolors = 0;
 
-    let strength = "";
-    let bgcolors = 0;
-
-    if (sliderValue > 16) {
-      strength = "STRONG";
-      bgcolors = "#A4FFAF";
-    } else if (sliderValue > 12) {
-      strength = "MEDIUM";
-      bgcolors = "#F8CD65";
-    } else if (sliderValue > 7) {
-      strength = "WEAK";
-      bgcolors = "#FB7C58";
-    } else {
-      strength = "TOO WEAK";
-      bgcolors = "#F64A4A";
-    }
+  if (sliderValue > 16) {
+    strength = "STRONG";
+    bgcolors = "#A4FFAF";
+  } else if (sliderValue > 12) {
+    strength = "MEDIUM";
+    bgcolors = "#F8CD65";
+  } else if (sliderValue > 7) {
+    strength = "WEAK";
+    bgcolors = "#FB7C58";
+  } else {
+    strength = "TOO WEAK";
+    bgcolors = "#F64A4A";
+  }
 
   let randomGenerator = () => {
 
-    const uppercaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const uppercaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
       const lowercaseLetters = 'abcdefghijklmnopqrstuvwxyz';
       const numbers = '1234567890';
       const specialSymbols = '!@#$%^&*';
@@ -83,13 +81,53 @@ function App() {
       setRandomValue(result);
     };
 
-  const copyToClipboard = () => {
-    if (randomValue) {
-      navigator.clipboard.writeText(randomValue)
-        .then(() => {
-        })
+    const getDivs = (bgcolors) => {
+      if (bgcolors === '#A4FFAF') {
+        return (
+          <>
+            <div className=" w-[10px] h-[28px]" style={{ backgroundColor: bgcolors }}></div>
+            <div className=" w-[10px] h-[28px]" style={{ backgroundColor: bgcolors }}></div>
+            <div className=" w-[10px] h-[28px]" style={{ backgroundColor: bgcolors }}></div>
+            <div className=" w-[10px] h-[28px]" style={{ backgroundColor: bgcolors }}></div>
+          </>
+        );
+      } else if (bgcolors ==='#F8CD65') {
+        return (
+          <>
+            <div className=" w-[10px] h-[28px]" style={{ backgroundColor: bgcolors }}></div>
+            <div className=" w-[10px] h-[28px]" style={{ backgroundColor: bgcolors }}></div>
+            <div className=" w-[10px] h-[28px]" style={{ backgroundColor: bgcolors }}></div>
+            <div className=" w-[10px] h-[28px] border-[2px] border-title-grey"></div>
+          </>
+        );
+      } else if (bgcolors === '#FB7C58') {
+        return (
+          <>
+            <div className=" w-[10px] h-[28px]" style={{ backgroundColor: bgcolors }}></div>
+            <div className=" w-[10px] h-[28px]" style={{ backgroundColor: bgcolors }}></div>
+            <div className=" w-[10px] h-[28px] border-[2px] border-title-grey"></div>
+            <div className=" w-[10px] h-[28px] border-[2px] border-title-grey"></div>
+          </>
+        );
+      } else {
+        return (
+          <>
+            <div className=" w-[10px] h-[28px]" style={{ backgroundColor: bgcolors }}></div>
+            <div className=" w-[10px] h-[28px] border-[2px] border-title-grey"></div>
+            <div className=" w-[10px] h-[28px] border-[2px] border-title-grey"></div>
+            <div className=" w-[10px] h-[28px] border-[2px] border-title-grey"></div>
+          </>
+        );
+      }
     }
-  };
+
+    const copyToClipboard = () => {
+      if (randomValue) {
+        navigator.clipboard.writeText(randomValue)
+          .then(() => {
+          })
+      }
+    };
 
 
   return (
@@ -163,10 +201,7 @@ function App() {
             <div className=" w-auto h-[28px] flex items-center">
               <span className=' font-jetbrain text-18px font-bold text-pass-color sm:text-pass'>{strength}</span>
               <div className=" w-[64px] flex justify-between ml-[16px]">
-                <div className=" w-[10px] h-[28px]" style={ {backgroundColor: bgcolors} }></div>
-                <div className=" w-[10px] h-[28px]" style={ {backgroundColor: bgcolors} }></div>
-                <div className=" w-[10px] h-[28px]" style={ {backgroundColor: bgcolors} }></div>
-                <div className=" w-[10px] h-[28px]" style={ {backgroundColor: bgcolors} }></div>
+              {getDivs(bgcolors)}
               </div>
             </div>
           </div>
