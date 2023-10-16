@@ -4,8 +4,8 @@ function App() {
 
   const [active, setActive] = useState(false);
   const [rangeValue, setRangeValue] = useState(0);
-  const [sliderValue, setSliderValue] = useState(0);
   const [randomValue, setRandomValue] = useState('');
+  const [characterLength, setCharacterLength] = useState(0)
 
   const [includeUppercaseLetters, setIncludeUppercaseLetters] = useState(false);
   const [includeLowercaseLetters, setIncludeLowercaseLetters] = useState(false);
@@ -17,59 +17,37 @@ function App() {
     setActive(!active);
   };
 
-  const customRangeStyle = {
-    width: '100%',
-    height: '8px',
-    appearance: 'none',
-    background: 'green', // Set the background color to green
-    outline: 'none',
-  };
-  
-  const customRangeTrackStyle = {
-    height: '8px',
-    background: 'lightgray', // Track color
-    position: 'relative',
-    width: '100%',
-  };
-  
-  const customRangeThumbStyle = {
-    width: '16px',
-    height: '16px',
-    borderRadius: '50%',
-    background: 'white', // Thumb color
-    position: 'absolute',
-    top: '50%',
-    transform: 'translateY(-50%)',
-  };
-
   const handleRangeChange = (event) => {
     const newValue = event.target.value;
     setRangeValue(newValue);
   };
 
-  const handleSliderChange = (event) => {
-    const newValue = event.target.value;
-    setSliderValue(newValue);
-    const backgroundColor = `rgb(0, ${255 - (newValue * 12)}, 0)`;
-    customRangeStyle.background = backgroundColor;
-  };
+  // const handleSliderChange = (event) => {
+  //   const newValue = event.target.value;
+  //   setSliderValue(newValue);
+  //   const backgroundColor = `rgb(0, ${255 - (newValue * 12)}, 0)`;
+  //   customRangeStyle.background = backgroundColor;
+  // };
 
   let strength = "";
   let bgcolors = 0;
 
-  if (sliderValue > 16) {
+  if (characterLength > 16) {
     strength = "STRONG";
     bgcolors = "#A4FFAF";
-  } else if (sliderValue > 12) {
+  } else if (characterLength > 12) {
     strength = "MEDIUM";
     bgcolors = "#F8CD65";
-  } else if (sliderValue > 7) {
+  } else if (characterLength >= 7) {
     strength = "WEAK";
     bgcolors = "#FB7C58";
-  } else {
+  } else if (characterLength < 7) {
     strength = "TOO WEAK";
     bgcolors = "#F64A4A";
   }
+  // } else if (characterLength == 0) {
+  //   RandomValue = "P4$5W0rD!";
+  // }
 
   let randomGenerator = () => {
 
@@ -80,7 +58,7 @@ function App() {
 
       let selectedCharacters = '';
       let result = '';
-      const length = sliderValue;
+      const length = characterLength;
 
       if (!includeUppercaseLetters && !includeLowercaseLetters && !includeNumbers && !includeSymbols) {
 
@@ -178,7 +156,7 @@ function App() {
                   COPIED
                 </p>
               )}
-            <img src="./images/icon-copy.svg" alt="Copy" onClick={copyToClipboard}/> 
+            <img src="./images/icon-copy.svg" alt="Copy" onClick={copyToClipboard} className=' lg:hover:grayscale'/> 
           </div>
         </div>
         <div className="w-full h-auto bg-div-bg p-[16px] mt-[16px] sm:mt-[24px] sm:pl-[32px] sm:pr-[32px] sm:pt-[34px] sm:pb-[32px]">
@@ -187,19 +165,29 @@ function App() {
               Character Length
             </span>
             <p className="font-jetbrain font-bold text-pass text-neon-green sm:text-32px">
-              {sliderValue}
+              {characterLength}
             </p>
           </div>
   
-          <input
-              type="range"
-              min="0"
-              max="20"
-              step="1"
-              value={sliderValue}
-              onChange={handleSliderChange}
-              className="range w-full h-[8px] outline-none border-none"
-            />
+          <div className='input-range-div'>
+            <div className='input-second-color' style={{width: `${characterLength * 4.8}%`}}></div>
+            <input
+                type="range"
+                min="0"
+                max="20"
+                step="1"
+                value={characterLength}
+                onChange={e => setCharacterLength(e.target.value)}
+                className="range w-full h-[8px] outline-none border-none"
+              />
+          </div>
+
+          {/* <div className='input-range-div'>
+            <div className='input-second-color' style={{width: `${characterLength * 4.8}%`}}></div>
+            <input className='range' type='range' min='0' max='20' step='1'
+            value={characterLength}
+            onChange={e => setCharacterLength(e.target.value)}/>
+          </div>  */}
 
           <div className='flex flex-col mt-[42px]'>
             <label className="flex items-center">
