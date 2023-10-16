@@ -64,13 +64,21 @@ input[type="checkbox"]:checked {
   z-index: 2;
 }
 
+.arrow {
+  filter: invert(100%);
+}
+
 @media (min-width:1024px) {
   input[type="checkbox"]:hover {
     border: 2px solid #A4FFAF;
   }
-  
+
   .range::-webkit-slider-thumb:hover {
     background: #18171F;
     border: 2px solid #A4FFAF;
+  }
+
+  .btn:hover .arrow {
+    filter: invert(0);
   }
 }

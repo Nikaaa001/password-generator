@@ -229,8 +229,8 @@ function App() {
             </div>
           </div>
 
-          <button className='w-full h-[56px] bg-neon-green mt-[16px] flex items-center justify-center text-16px text-div-bg sm:text-18px' onClick={randomGenerator}>
-            GENERATE <img src="./images/bx_arrow-to-left.svg" alt="arrow" className='ml-[16px]' /></button>
+          <button className='btn w-full h-[56px] bg-neon-green mt-[16px] flex items-center justify-center text-16px text-div-bg sm:text-18px lg:hover:bg-div-bg lg:hover:border-[2px] border-neon-green lg:hover:text-neon-green' onClick={randomGenerator}>
+            GENERATE <img src="./images/bx_arrow-to-left-wight.svg" alt="arrow" className='ml-[16px] arrow' /></button>
 
         </div>
       </div>
