@@ -11,9 +11,35 @@ function App() {
   const [includeLowercaseLetters, setIncludeLowercaseLetters] = useState(false);
   const [includeNumbers, setIncludeNumbers] = useState(false);
   const [includeSymbols, setIncludeSymbols] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
 
   const handleClick = () => {
     setActive(!active);
+  };
+
+  const customRangeStyle = {
+    width: '100%',
+    height: '8px',
+    appearance: 'none',
+    background: 'green', // Set the background color to green
+    outline: 'none',
+  };
+  
+  const customRangeTrackStyle = {
+    height: '8px',
+    background: 'lightgray', // Track color
+    position: 'relative',
+    width: '100%',
+  };
+  
+  const customRangeThumbStyle = {
+    width: '16px',
+    height: '16px',
+    borderRadius: '50%',
+    background: 'white', // Thumb color
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateY(-50%)',
   };
 
   const handleRangeChange = (event) => {
@@ -24,6 +50,8 @@ function App() {
   const handleSliderChange = (event) => {
     const newValue = event.target.value;
     setSliderValue(newValue);
+    const backgroundColor = `rgb(0, ${255 - (newValue * 12)}, 0)`;
+    customRangeStyle.background = backgroundColor;
   };
 
   let strength = "";
@@ -125,6 +153,7 @@ function App() {
       if (randomValue) {
         navigator.clipboard.writeText(randomValue)
           .then(() => {
+            setIsCopied(true);
           })
       }
     };
@@ -139,12 +168,18 @@ function App() {
         </h1>
   
         <div
-          className="w-full h-[64px] bg-div-bg mt-[16px] pl-[16px] pr-[15.5px] flex items-center justify-between sm:mt-[31px] sm:pl-[32px] sm:pr-[32px]">
+          className="w-full h-[64px] bg-div-bg mt-[16px] pl-[16px] pr-[15.5px] flex items-center justify-between sm:mt-[31px] sm:pl-[32px] sm:pr-[32px] overflow-auto">
           <p className=" font-jetbrain font-bold text-pass text-pass-color sm:text-32px">
             {randomValue}
           </p>
-          <img src="./images/icon-copy.svg" alt="Copy" onClick={copyToClipboard}/> 
-          {/*  toggleText */}
+          <div className='flex'>
+            {isCopied && (
+                <p className="font-jetbrain mr-[16px] text-neon-green text-18px">
+                  COPIED
+                </p>
+              )}
+            <img src="./images/icon-copy.svg" alt="Copy" onClick={copyToClipboard}/> 
+          </div>
         </div>
         <div className="w-full h-auto bg-div-bg p-[16px] mt-[16px] sm:mt-[24px] sm:pl-[32px] sm:pr-[32px] sm:pt-[34px] sm:pb-[32px]">
           <div className="w-auto flex items-center justify-between">
@@ -163,7 +198,7 @@ function App() {
               step="1"
               value={sliderValue}
               onChange={handleSliderChange}
-              className="range w-full h-[8px] outline-none"
+              className="range w-full h-[8px] outline-none border-none"
             />
 
           <div className='flex flex-col mt-[42px]'>
